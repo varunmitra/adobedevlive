@@ -1,6 +1,4 @@
 mountpoints:
-  /: https://woodsidegroup.sharepoint.com/:f:/r/sites/HubbleHomesWebsite/Shared%20Documents/Website/hubblehomes
+  /: https://adobe-my.sharepoint.com/:f:/r/personal/vmitra_adobe_com/Documents/AdobeDevLive
 
-folders:
-  /news/category/: /news
 
