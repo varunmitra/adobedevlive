@@ -1,0 +1,17 @@
+{
+    "plugins": [
+        {
+            "id": "openSheet",
+            "title": "Open HubbleHomes Sheet",
+            "event": "openSheet",
+            "environments": ["dev", "preview"]
+        },
+        {
+          "id": "library",
+          "title": "Library",
+          "environments": ["edit"],
+          "url": "/tools/sidekick/library.html",
+          "includePaths": ["**.docx**"]
+        }
+    ]
+}

@@ -1,0 +1,242 @@
+.columns > div {
+  display: flex;
+  flex-direction: column;  
+}
+
+.columns img {
+  width: 100%;  
+}
+
+.columns > div > div {
+  order: 1;
+  padding-bottom: 10px;
+}
+
+.columns > div > .columns-img-col {
+  order: 0;
+}
+
+.columns > div > .columns-img-col img {
+  display: block;
+}
+
+@media (width >= 900px) {
+  .columns > div {
+    align-items: flex-start;
+    flex-direction: unset;
+    gap: 32px;
+    padding-bottom: 10px;
+    
+    h2 {
+      line-height: 100px;
+    }
+  }
+
+  .columns > div > div {
+    flex: 1;
+    order: unset;
+  }
+}
+
+/* About variant */
+.columns.about {
+  > div {
+    @media (width >= 900px) {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+    }
+  }
+
+  /* column */
+  > div > div {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+    
+    &:nth-child(1) { 
+      background: #3955b1; 
+      color: #fff; 
+      .expand-icon svg { fill: #fff; }
+    }
+    
+    &:nth-child(2) { 
+      background: #eed74b; 
+      color: #383838; 
+      .expand-icon svg { fill: #383838; }
+    }
+    
+    &:nth-child(3) { 
+      background: #26345e; 
+      color: #fff; 
+      .expand-icon svg { fill: #fff; }
+    }
+  
+    .header-row {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    h2 {
+      color: inherit;
+      font-size: 24px;
+      font-weight: 600;
+      padding: 0;
+      margin: 0;
+    }
+
+    .expand-icon {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      right: 0;
+      transition: transform 0.3s ease;
+    }
+
+    &.expanded .expand-icon {
+      transform: rotate(90deg);
+    }
+
+    .column-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+
+    &.expanded .column-content {
+      max-height: 1000px;
+      transition: max-height 0.5s ease-in;
+    }
+
+    @media (width >= 900px) {
+      flex: 1 0 auto;
+      margin-bottom: 0;
+      text-align: left;
+      max-width: calc(33.33% - 21.33px);
+
+      .header-row {
+        justify-content: flex-start;
+      }
+
+      .expand-icon {
+        display: none;
+      }
+
+      .column-content {
+        max-height: none;
+        overflow: visible;
+      }
+    }
+
+    /* cards */
+    a {
+      display: block;
+      background: #fff;
+      margin-top: 16px;
+      padding: 16px;
+      box-shadow: 5px 5px 10px 3px rgba(151 151 151 / 30%);
+      text-align: left;
+
+      h3 {
+        line-height: 1.1em;
+        font-size: 24px;
+        margin-top: 3px;
+        margin-bottom: 2px;
+        font-weight: 400;
+        color: var(--link-color);
+      }
+
+      img {
+        float: right;
+        margin: 0 0 20px 10px;
+        width: 80px;
+        height: 80px;
+      }
+
+      p { 
+        margin: 0 0 10px;
+        line-height: 1.4em;
+        font-size: 16px;
+        color: var(--link-color);
+        font-weight: normal;
+      }
+      &:hover p { color: var(--light-blue) }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+.columns.finance {
+  margin-top: 20px;
+
+  img {
+    width: 50%;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: row;    
+  }
+
+  >div >div {
+    flex: unset;
+  }
+
+  >div > div:nth-of-type(1) {
+    width: 40%;
+    text-align: center;
+  }
+
+  >div > div:nth-of-type(2) {
+    width: 60%;
+
+    p {
+      font-size: 16px;
+      line-height: 2em;
+      color: var(--link-color);
+      font-weight: normal;
+    }
+  }
+}
+}
+
+@media (max-width: 768px) {
+  .columns.finance {
+    margin-top: 20px;
+    
+    img {
+      width: 80%;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column-reverse;    
+    }
+
+    >div >div {
+      flex: unset;
+    }
+
+    >div > div:nth-of-type(1) {      
+      text-align: center;
+    }
+
+    >div > div:nth-of-type(2) {
+      padding-top: 20px; 
+         
+      p {
+        font-size: 16px;
+        line-height: 2em;
+        color: var(--link-color);
+        font-weight: normal;
+        text-align: center;
+      }
+    }
+  }
+  }

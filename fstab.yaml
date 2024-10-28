@@ -1,0 +1,6 @@
+mountpoints:
+  /: https://woodsidegroup.sharepoint.com/:f:/r/sites/HubbleHomesWebsite/Shared%20Documents/Website/hubblehomes
+
+folders:
+  /news/category/: /news
+

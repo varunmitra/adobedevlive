@@ -1,0 +1,50 @@
+/* stylelint-disable declaration-block-single-line-max-declarations */
+@import url('/styles/layouts.css');
+@import url('/styles/sidebar.css');
+@import url('/styles/articles.css');
+
+.default-content-wrapper > p {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.total-contribution {
+  width: 450px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px auto;
+  font-weight: bold;
+  font-size: var(--heading-font-size-l);
+
+  div:first-of-type {
+    width: 50%;
+    text-align: center;
+
+    p {
+      background: #0055b9;
+      color: white;
+    }
+  }
+
+  div:nth-of-type(2) {
+    width: 50%;
+    text-align: center;
+
+    p {
+      background: #fcd700;
+      color: #0055b9;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .total-contribution {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+    div {
+      width: 100%;
+    }
+  }
+}
