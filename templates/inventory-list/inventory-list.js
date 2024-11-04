@@ -4,7 +4,7 @@ import { div, button } from '../../scripts/dom-helpers.js';
 import { loadRates } from '../../scripts/mortgage.js';
 
 let startIndex = 0;
-let endIndex;
+let endIndex = 0;
 const limit = 8;
 
 async function displayCards(inventoryHomes, fragment) {
@@ -22,21 +22,21 @@ async function displayCards(inventoryHomes, fragment) {
 
 export default async function decorate(doc) {
   await loadRates();
+  let observer;
   const fragment = doc.querySelector('.fragment-wrapper');
   fragment.classList.add('disclaimer');
   const inventoryHomes = await getInventorySheet('data');
   const filteredInventory = inventoryHomes.filter((home) => home.status === 'Under Construction');
   const inventorySize = filteredInventory.length;
-  const loadMoreBtn = button({ class: 'load-more-btn' }, 'See More');
-  const loadMore = div({ class: 'load-more' }, loadMoreBtn);
-  await displayCards(filteredInventory, fragment);
- loadMoreBtn.addEventListener(('click'), async () => {
-    startIndex = endIndex;
-    endIndex += limit;
-    await displayCards(filteredInventory, loadMore);
-    if (inventorySize <= endIndex) {
-      loadMore.classList.add('hidden');
-    }
+  await displayCards(inventoryHomes, fragment);
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(async (entry) => {
+      if (entry.isIntersecting && inventorySize >= endIndex) {
+        startIndex = endIndex;
+        displayCards(inventoryHomes, fragment);
+      }
+      if (endIndex >= inventorySize) observer.disconnect();
+    });
   });
-  fragment.insertAdjacentElement('beforebegin', loadMore);
+  observer.observe(fragment);
 }
