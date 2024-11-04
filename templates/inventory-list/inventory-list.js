@@ -9,7 +9,7 @@ const limit = 8;
 
 async function displayCards(inventoryHomes, fragment) {
   endIndex = startIndex + limit;
-  window.hh.current.inventory = inventoryHomes.slice(startIndex, endIndex);
+  window.hh.current.inventory = inventoryHomes;
   //window.hh.current.inventory = inventoryHomes
   const modelsBlock = buildBlock('cards', []);
   modelsBlock.classList.add('inventory');
@@ -28,8 +28,8 @@ export default async function decorate(doc) {
   const inventoryHomes = await getInventorySheet('data');
   const filteredInventory = inventoryHomes.filter((home) => home.status === 'Under Construction');
   const inventorySize = filteredInventory.length;
-  //await displayCards(inventoryHomes, fragment);
-  observer = new IntersectionObserver((entries) => {
+  await displayCards(inventoryHomes, fragment);
+  /*observer = new IntersectionObserver((entries) => {
     entries.forEach(async (entry) => {
       if (entry.isIntersecting && inventorySize >= endIndex) {
         startIndex = endIndex;
@@ -38,5 +38,5 @@ export default async function decorate(doc) {
       if (endIndex >= inventorySize) observer.disconnect();
     });
   });
-  observer.observe(fragment);
+  observer.observe(fragment);*/
 }
