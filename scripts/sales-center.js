@@ -57,28 +57,33 @@ async function getSalesCenterCommunityNameFromUrl(url) {
  * if not found.
  */
 async function getSalesCenterForCommunity(community) {
-  const salesOffices = await getSalesOfficesSheet('data');
-  const salesOfficeVirtual = salesOffices.find((office) => office.community === community);
+  try {
+    const salesOffices = await getSalesOfficesSheet('data');
+    const salesOfficeVirtual = salesOffices.find((office) => office.community.toLowerCase() === community.toLowerCase());
 
-  const salesOffice = salesOffices
-    .find((office) => office.community === salesOfficeVirtual['sales-center-location']);
+    const salesOffice = salesOffices
+      .find((office) => office.community.toLowerCase() === salesOfficeVirtual['sales-center-location'].toLowerCase());
 
-  const staff = await getStaffSheet('sales');
-  const specialists = salesOffice
-    ? staff.filter((specialist) => Object.keys(specialist)
-      .some((key) => key.startsWith('office location') && specialist[key] === community))
-    : [];
+    const staff = await getStaffSheet('sales');
+    const specialists = salesOffice
+      ? staff.filter((specialist) => Object.keys(specialist)
+        .some((key) => key.startsWith('office location') && specialist[key] === community))
+      : [];
 
-  if (specialists && specialists.length > 0) {
-    salesOffice.specialists = specialists.map((specialist) => ({
-      name: specialist.name,
-      email: specialist.email,
-      phone: specialist.phone,
-      headshotImage: specialist.headshot,
-    }));
+    if (specialists && specialists.length > 0) {
+      salesOffice.specialists = specialists.map((specialist) => ({
+        name: specialist.name,
+        email: specialist.email,
+        phone: specialist.phone,
+        headshotImage: specialist.headshot,
+      }));
+    }
+
+    return salesOffice || {};
+  } catch (error) {
+    console.error('Error fetching sales center details:', error);
+    return {};
   }
-
-  return salesOffice || {};
 }
 
 export {
